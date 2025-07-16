@@ -15,3 +15,11 @@ spec:
 
   - name: clone  # clone code from
       # repository hosed in github
+
+  - name: build # build code
+  # into binary
+
+  - name: test
+  #
+
+  - name: lint
