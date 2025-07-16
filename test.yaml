@@ -12,3 +12,6 @@ spec:
     - name: rebuild
       # whether to rebuild
       value: $(params.rebuild)
+
+  - name: clone  # clone code from
+      # repository hosed in github
