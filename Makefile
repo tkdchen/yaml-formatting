@@ -7,4 +7,4 @@ reproduce:
 	.venv/bin/python3 -m pip install -r pipeline-migration-tool/requirements.txt
 	.venv/bin/python3 -m pip install -e pipeline-migration-tool/
 	.venv/bin/python3 ./main.py
-	git diff
+	git --no-pager diff test.yaml
