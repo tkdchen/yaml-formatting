@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
+
 import argparse
 from ruamel.yaml import YAML
 from subprocess import run
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Hacking on YAML formatting")
 parser.add_argument("--yq-in-advance", action="store_true", help="Run yq before loading test YAML file.")
 args = parser.parse_args()
 
@@ -19,5 +21,5 @@ yaml.preserve_quotes = True
 with open(yaml_file, "r") as f:
     doc = yaml.load(f)
 
-with open(yaml_file, "w+") as f:
+with open(yaml_file + ".modified", "w+") as f:
     yaml.dump(doc, f)
