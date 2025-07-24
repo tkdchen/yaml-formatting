@@ -23,3 +23,8 @@ spec:
   #
 
   - name: lint
+    params: [
+      {
+        "name": "excludes", "value":
+        "rule1,rule2"
+      }]
