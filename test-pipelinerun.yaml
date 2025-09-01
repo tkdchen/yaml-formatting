@@ -1,0 +1,51 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  annotations:
+    build.appstudio.openshift.io/repo: https://github.com/cqi-stonesoup-test/simple-python-app?rev={{revision}}
+    build.appstudio.redhat.com/commit_sha: '{{revision}}'
+    build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
+    build.appstudio.redhat.com/target_branch: '{{target_branch}}'
+    pipelinesascode.tekton.dev/cancel-in-progress: "true"
+    pipelinesascode.tekton.dev/max-keep-runs: "3"
+    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch
+      == "main"
+  creationTimestamp: null
+  labels:
+    appstudio.openshift.io/application: simple-python-app
+    appstudio.openshift.io/component: simple-python-app-c5043
+    pipelines.appstudio.openshift.io/type: build
+  name: simple-python-app-c5043-on-pull-request
+  namespace: cqi-tenant
+spec:
+  pipelineSpec:
+    tasks:
+    # comment line: tasks start from here
+    - name: init
+      params:
+      # We can't provide a StackRox-style tag because it is not known
+      # As a workaround, we still provide a unique tag that's based on
+      # expected input. We later actually add this tag on a built image
+      - name: image-url
+        value: $(params.output-image-repo):konflux-$(params.revision)  # use pinned image
+
+      - name: rebuild
+        # whether to rebuild
+        value: $(params.rebuild)
+
+    - name: clone  # clone code from
+        # repository hosed in github
+
+    - name: build # build code
+    # into binary
+
+    - name: test
+    #
+      data: ["line1", {name: value}]
+
+    - name: lint
+      params: [
+        {
+          "name": "excludes", "value":
+          "rule1,rule2"
+        }]
